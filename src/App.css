@@ -1,4 +1,38 @@
-#root {
-  max-width: 1280px;
+.appContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 90%;
   margin: 0 auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.figure {
+  margin: 0;
+  padding: 0;
+}
+
+.figCaption {
+  font-size: 12px;
+}
+
+.parkImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.parkDescription {
+  display: flex;
+  text-align: left;
+}
+
+.explore {
+  padding-top: 2em;
 }

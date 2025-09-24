@@ -1,8 +1,13 @@
+import FooterStyles from "./Footer.module.css";
+
 function Footer() {
   return (
-    <footer>
-      <p>This is the footer...</p>
-    </footer>
+    <>
+      <hr className={FooterStyles.divider} />
+      <footer className={FooterStyles.footer}>
+        <p>&copy; Christina Ligare</p>
+      </footer>
+    </>
   );
 }
 

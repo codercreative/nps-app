@@ -1,0 +1,9 @@
+.divider {
+  max-width: 100px;
+  margin-top: 2em;
+  background-color: green;
+}
+
+.footer {
+  text-align: center;
+}

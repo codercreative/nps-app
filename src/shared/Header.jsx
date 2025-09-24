@@ -1,7 +1,9 @@
+import HeaderStyles from "./Header.module.css";
+
 function Header() {
   return (
-    <header>
-      <h1>National Park Service </h1>
+    <header className={HeaderStyles.header}>
+      <h1 className={HeaderStyles.title}>US National Parks </h1>
     </header>
   );
 }
