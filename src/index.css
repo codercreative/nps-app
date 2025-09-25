@@ -1,6 +1,8 @@
 /* ========== body ========== */
 * {
   background-color: #1c1c1c;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 body {
@@ -10,6 +12,8 @@ body {
   line-height: 1.5;
   font-family: "Funnel Display", sans-serif;
   color: #fffbf9;
+  /* border: 2px solid lightblue; */
+  height: 80vh;
 }
 
 /* ========== headings ========== */

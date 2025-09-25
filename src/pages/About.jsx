@@ -2,8 +2,8 @@ import AboutStyles from "./About.module.css";
 
 function About() {
   return (
-    <main>
-      <h1>About US National Parks</h1>
+    <main className={AboutStyles.main}>
+      <h2>About </h2>
       <div>
         <p>Lorem ipsum....</p>
       </div>

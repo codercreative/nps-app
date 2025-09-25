@@ -8,6 +8,8 @@
 .nav {
   display: flex;
   gap: 0.8em;
+  /* border: 2px solid orange; */
+  margin-left: 8em;
 }
 
 .navLi {
