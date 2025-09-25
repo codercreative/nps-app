@@ -1,19 +1,52 @@
 //ok to use App.css instead of styled components or css module??
-import "./App.css";
 
 import { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router";
+
+import "./App.css";
 
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
 
+import About from "./pages/About";
+import Parks from "./pages/Parks";
+import NotFound from "./pages/NotFound";
+
+import FeaturedSection from "./components/FeaturedSection";
+
 function App() {
   const [parks, setParks] = useState([]);
+  const [headerTitle, setHeaderTitle] = useState("");
 
   const baseURL = "https://developer.nps.gov/api/v1";
 
   const endpoint = {
     parks: `${baseURL}/parks`,
   };
+
+  //=============== USE EFFECT ===============
+
+  const location = useLocation();
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        document.title = "US National Parks";
+        setHeaderTitle("US National Parks");
+        break;
+      case "/about":
+        document.title = "About";
+        setHeaderTitle("About");
+        break;
+      case "/parks":
+        document.title = "Parks";
+        setHeaderTitle("Parks");
+        break;
+      default:
+        document.title = "Not Found";
+        setHeaderTitle("Not Found");
+    }
+  }, [location]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,41 +63,16 @@ function App() {
   }, []);
 
   return (
-    <>
-      <div className="appContainer">
-        <Header />
-        {parks.map((park) => {
-          return (
-            <div className="container" key={park.id}>
-              <div>
-                <figure className="figure">
-                  <img
-                    className="parkImg"
-                    src={park.images[0].url}
-                    alt={park.fullName}
-                  />
-                  <figcaption className="figCaption">
-                    {/* //Need to filter out the images that are not NPS photo credited */}
-                    {park.images[0].caption}. Credit: {park.images[0].credit}
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-          );
-        })}
-        <div className="explore">
-          <h2>Explore</h2>
-          <p>
-            Click on the image above or the Parks button at the top of this page
-            to explore beautiful trails, hidden gems, and immersive national
-            experiences. Whether you are looking to hike, relax, or reconnect
-            with nature, your next adventure starts here!
-          </p>
-        </div>
-      </div>
-
+    <div className="appContainer">
+      <Header title={headerTitle} />
+      <Routes>
+        <Route path="/" element={<FeaturedSection />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/parks" element={<Parks />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 
