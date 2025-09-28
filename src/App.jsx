@@ -15,14 +15,7 @@ import NotFound from "./pages/NotFound";
 import FeaturedSection from "./components/FeaturedSection";
 
 function App() {
-  const [parks, setParks] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
-
-  const baseURL = "https://developer.nps.gov/api/v1";
-
-  const endpoint = {
-    parks: `${baseURL}/parks`,
-  };
 
   //=============== USE EFFECT ===============
 
@@ -48,20 +41,6 @@ function App() {
     }
   }, [location]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`${endpoint.parks}?parkCode=yose`, {
-        headers: {
-          "X-Api-Key": import.meta.env.VITE_API_KEY,
-        },
-      });
-      const json = await result.json();
-      console.log(json);
-      setParks(json.data);
-    };
-    fetchData();
-  }, []);
-
   return (
     <div className="appContainer">
       <Header title={headerTitle} />
@@ -71,7 +50,7 @@ function App() {
         <Route path="/parks" element={<Parks />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

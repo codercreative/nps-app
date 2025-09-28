@@ -2,8 +2,8 @@ import FeaturedStyles from "./FeaturedSection.module.css";
 
 function FeaturedSection() {
   return (
-    <>
-      <div className={FeaturedStyles.container}>
+    <section className={FeaturedStyles.container}>
+      <div>
         <figure className={FeaturedStyles.figure}>
           <img
             className={FeaturedStyles.parkImg}
@@ -20,12 +20,12 @@ function FeaturedSection() {
         <h2>Explore</h2>
         <p>
           Click on the image above or the Parks button at the top of this page
-          to explore beautiful trails, hidden gems, and immersive national
-          experiences. Whether you are looking to hike, relax, or reconnect with
-          nature, your next adventure starts here!
+          to explore beautiful trails, hidden gems, and immersive experiences.
+          Whether you are looking to hike, relax, or reconnect with nature, your
+          next adventure starts here!
         </p>
       </div>
-    </>
+    </section>
   );
 }
 export default FeaturedSection;

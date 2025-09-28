@@ -1,26 +1,52 @@
 .header {
-  padding: 3em 0 0.5em;
+  margin: 2em;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 100%;
+  max-width: 1200px;
+}
+
+.logoTitle {
+  display: flex;
+  align-items: center;
+}
+
+.treeIcon {
+  font-size: 1.6em;
+  margin-right: 0.2em;
 }
 
 .nav {
   display: flex;
   gap: 0.8em;
-  /* border: 2px solid orange; */
-  margin-left: 8em;
+  /* margin-left: 8em; */
 }
 
 .navLi {
   color: #fffbf9;
   text-decoration: none;
   font-size: 1.2rem;
+  border: 2px solid transparent;
+  padding: 0 0.3em;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.navLi:last-child {
+  background-color: green;
+}
+
+.navLi:hover,
+.navLi:last-child:hover {
+  color: green;
+  background-color: #1c1c1c;
+  border: 2px solid green;
+  transform: scale(1.02);
 }
 
 @media (max-width: 767px) {
   .header {
     flex-direction: column;
-    padding-bottom: 1.5em;
   }
 }

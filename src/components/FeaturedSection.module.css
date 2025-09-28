@@ -11,15 +11,19 @@
   padding: 0;
 }
 
+.parkImg {
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid green;
+  border-radius: 12px;
+}
+
 .figCaption {
   font-size: 12px;
 }
 
-.parkImg {
-  width: 100%;
-  object-fit: cover;
-}
-
 .explore {
   margin-top: 2em;
+  text-align: left;
 }

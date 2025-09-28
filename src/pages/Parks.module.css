@@ -1,5 +1,28 @@
 .main {
-  border: 2px solid lightgreen;
+  /* border: 2px solid lightgreen; */
   width: 700px;
   max-width: 100%;
+}
+
+.adventureTitle {
+  margin: 2em 0;
+}
+
+.parkListContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.figure {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
 }
