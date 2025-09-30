@@ -15,12 +15,11 @@
   width: 100%;
   object-fit: cover;
   cursor: pointer;
-  border: 2px solid green;
   border-radius: 12px;
 }
 
 .figCaption {
-  font-size: 12px;
+  font-size: 0.8rem;
 }
 
 .explore {
