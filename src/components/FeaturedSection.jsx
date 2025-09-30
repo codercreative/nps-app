@@ -17,7 +17,7 @@ function FeaturedSection() {
       </div>
 
       <div className={FeaturedStyles.explore}>
-        <h2>Explore</h2>
+        <h2 className={FeaturedStyles.exploreTitle}>Explore</h2>
         <p>
           Click on the image above or the Parks button at the top of this page
           to explore beautiful trails, hidden gems, and immersive experiences.

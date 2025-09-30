@@ -22,7 +22,11 @@
   font-size: 0.8rem;
 }
 
+.exploreTitle {
+  font-size: 1.4rem;
+}
+
 .explore {
-  margin-top: 2em;
+  margin-top: 3em;
   text-align: left;
 }

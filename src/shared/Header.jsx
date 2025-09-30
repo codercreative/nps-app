@@ -10,13 +10,28 @@ function Header({ title }) {
       </div>
 
       <nav className={HeaderStyles.nav}>
-        <NavLink className={HeaderStyles.navLi} to="/">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? HeaderStyles.active : HeaderStyles.inactive
+          }
+          to="/"
+        >
           Home
         </NavLink>
-        <NavLink className={HeaderStyles.navLi} to="/about">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? HeaderStyles.active : HeaderStyles.inactive
+          }
+          to="/about"
+        >
           About
         </NavLink>
-        <NavLink className={HeaderStyles.navLi} to="/parks">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? HeaderStyles.active : HeaderStyles.inactive
+          }
+          to="/parks"
+        >
           Parks
         </NavLink>
       </nav>
