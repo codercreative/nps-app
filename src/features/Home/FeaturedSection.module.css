@@ -1,0 +1,49 @@
+.container {
+  max-width: 1200px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.figure {
+  margin: 0;
+  padding: 0;
+}
+
+.parkImg {
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.figCaption {
+  font-size: 0.8rem;
+}
+
+.ctaBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  color: #6fbf73;
+  border: 2px solid #6fbf73;
+  border-radius: 50px;
+  margin-top: 1em;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: border 0.3s ease;
+  text-decoration: none;
+  align-self: center;
+  padding: 0.5em 1em;
+}
+
+.ctaBtn:hover i {
+  color: #ffa500;
+}
+
+.ctaBtn:hover {
+  border: 2px solid transparent;
+  color: #ffa500;
+}

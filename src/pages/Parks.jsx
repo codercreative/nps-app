@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import ParkCard from "../components/ParkCard.jsx";
+import ParkCard from "../features/Parks/ParkCard.jsx";
 import ParksStyles from "./Parks.module.css";
 
 function Parks() {
   const [parks, setParks] = useState([]);
   const [userInputText, setUserInputText] = useState("");
   const [matchedPark, setMatchedPark] = useState(null);
+  const [selectedPark, setSelectedPark] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const baseURL = "https://developer.nps.gov/api/v1";
   const endpoint = {
@@ -22,6 +24,7 @@ function Parks() {
       const json = await result.json();
       console.log(json);
       setParks(json.data);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
@@ -38,10 +41,14 @@ function Parks() {
     setMatchedPark(parkMatch);
   }
 
+  function handleSelectedPark(park) {
+    setSelectedPark(park);
+  }
+
   return (
     <main className={ParksStyles.main}>
       <h2 className={ParksStyles.adventureTitle}>Find your next adventure!</h2>
-      <p>Search by name or state below.</p>
+      <p>Search by name or select a park from the list below.</p>
       <div className={ParksStyles.searchContainer}>
         <input
           className={ParksStyles.searchPark}
@@ -50,21 +57,22 @@ function Parks() {
           value={userInputText}
           onChange={handleSearchPark}
         />
-        <select
-          className={ParksStyles.selectState}
-          name=""
-          id=""
-          placeholder="Select State"
-        ></select>
-        <button className={ParksStyles.clearSearch}>Clear search</button>
-        {/* <i class="fa-solid fa-magnifying-glass"></i> */}
+
+        <button
+          className={ParksStyles.selectBtn}
+          onClick={() => handleSelectedPark(matchedPark)}
+        >
+          Select
+        </button>
       </div>
 
       {matchedPark ? (
         <ParkCard
           park={matchedPark}
           name={matchedPark.fullName}
+          altName={matchedPark.images[0].altText}
           image={matchedPark.images[0].url}
+          imageTitle={matchedPark.images[0].title}
           imageCredit={matchedPark.images[0].credit}
         />
       ) : (

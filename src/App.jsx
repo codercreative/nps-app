@@ -12,7 +12,7 @@ import About from "./pages/About";
 import Parks from "./pages/Parks";
 import NotFound from "./pages/NotFound";
 
-import FeaturedSection from "./components/FeaturedSection";
+import FeaturedSection from "./features/Home/FeaturedSection";
 
 function App() {
   const [headerTitle, setHeaderTitle] = useState("");

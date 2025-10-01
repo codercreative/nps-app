@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import FeaturedStyles from "./FeaturedSection.module.css";
 
 function FeaturedSection() {
@@ -16,15 +17,11 @@ function FeaturedSection() {
         </figure>
       </div>
 
-      <div className={FeaturedStyles.explore}>
-        <h2 className={FeaturedStyles.exploreTitle}>Explore</h2>
-        <p>
-          Click on the image above or the Parks button at the top of this page
-          to explore beautiful trails, hidden gems, and immersive experiences.
-          Whether you are looking to hike, relax, or reconnect with nature, your
-          next adventure starts here!
-        </p>
-      </div>
+      <NavLink className={FeaturedStyles.ctaBtn} to="/parks">
+        <i className={`fa-solid fa-person-hiking`}></i>
+        <span>Start exploring all parks </span>
+        <i className={`fa-solid fa-arrow-right`}></i>
+      </NavLink>
     </section>
   );
 }

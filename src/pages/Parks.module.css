@@ -13,14 +13,12 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* border: 2px solid green; */
   margin: 3em 0;
   gap: 1em;
 }
 
 .searchPark,
-.selectState,
-.clearSearch {
+.selectBtn {
   border-radius: 12px;
   border: 2px solid white;
   padding: 1em;
@@ -32,9 +30,6 @@
 }
 
 .searchPark {
-  flex: 2;
-}
-.selectState {
   flex: 1;
 }
 
