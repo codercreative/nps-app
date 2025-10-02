@@ -29,6 +29,16 @@ function Parks() {
     fetchData();
   }, []);
 
+  function handleEnterKey(e) {
+    console.log(e);
+    if (e.key === "Enter") {
+      if (matchedPark) {
+        handleSelectedPark(matchedPark);
+        setUserInputText("");
+      }
+    }
+  }
+
   function handleSearchPark(e) {
     const userInput = e.target.value.toLowerCase();
     setUserInputText(userInput);
@@ -43,10 +53,11 @@ function Parks() {
 
   function handleSelectedPark(park) {
     setSelectedPark(park);
+    setUserInputText("");
   }
 
-  return (
-    <main className={ParksStyles.main}>
+  const titleAndSearchFields = (
+    <>
       <h2 className={ParksStyles.adventureTitle}>Find your next adventure!</h2>
       <p>Search by name or select a park from the list below.</p>
       <div className={ParksStyles.searchContainer}>
@@ -56,6 +67,7 @@ function Parks() {
           placeholder="Search by park name"
           value={userInputText}
           onChange={handleSearchPark}
+          onKeyDown={handleEnterKey}
         />
 
         <button
@@ -65,9 +77,38 @@ function Parks() {
           Select
         </button>
       </div>
+    </>
+  );
 
-      {matchedPark ? (
+  if (isLoading) {
+    return (
+      <main className={ParksStyles.main}>
+        {titleAndSearchFields}
+        <div className={ParksStyles.loadingContainer}>
+          <i className="fa-solid fa-spinner"></i>
+          <p>Loading parks...</p>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className={ParksStyles.main}>
+      {titleAndSearchFields}
+
+      {selectedPark ? (
         <ParkCard
+          key={selectedPark.id}
+          park={selectedPark}
+          name={selectedPark.fullName}
+          altName={selectedPark.images[0].altText}
+          image={selectedPark.images[0].url}
+          imageTitle={selectedPark.images[0].title}
+          imageCredit={selectedPark.images[0].credit}
+        />
+      ) : matchedPark ? (
+        <ParkCard
+          key={matchedPark.id}
           park={matchedPark}
           name={matchedPark.fullName}
           altName={matchedPark.images[0].altText}
