@@ -12,7 +12,9 @@ function Header({ title }) {
       <nav className={HeaderStyles.nav}>
         <NavLink
           className={({ isActive }) =>
-            isActive ? HeaderStyles.active : HeaderStyles.inactive
+            `${isActive ? HeaderStyles.active : HeaderStyles.inactive} ${
+              HeaderStyles.navLink
+            }`
           }
           to="/"
         >
@@ -20,7 +22,9 @@ function Header({ title }) {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? HeaderStyles.active : HeaderStyles.inactive
+            `${isActive ? HeaderStyles.active : HeaderStyles.inactive} ${
+              HeaderStyles.navLink
+            }`
           }
           to="/about"
         >
@@ -28,7 +32,9 @@ function Header({ title }) {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? HeaderStyles.active : HeaderStyles.inactive
+            `${isActive ? HeaderStyles.active : HeaderStyles.inactive} ${
+              HeaderStyles.navLink
+            }`
           }
           to="/parks"
         >

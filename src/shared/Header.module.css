@@ -31,12 +31,20 @@
   font-weight: 700;
 }
 
+.navLink {
+  transition: all 0.3s ease;
+}
+
 .active {
   color: #4b7253;
 }
 
 .inactive {
   color: #6fbf73;
+}
+
+.inactive.navLink:hover {
+  color: #ffa500;
 }
 
 @media (max-width: 767px) {

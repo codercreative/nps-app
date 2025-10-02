@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink, useNavigate, useSearchParams } from "react-router";
 import ParkCard from "../features/Parks/ParkCard.jsx";
 import ParksStyles from "./Parks.module.css";
 
@@ -55,6 +56,33 @@ function Parks() {
     setSelectedPark(park);
     setUserInputText("");
   }
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const itemsPerPage = 5;
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  const indexOfFirstPark = (currentPage - 1) * itemsPerPage;
+  const totalPages = Math.ceil(parks.length / itemsPerPage);
+
+  function handlePreviousPage() {
+    if (currentPage === 1) return;
+    setSearchParams({ page: currentPage - 1 });
+  }
+
+  function handleNextPage() {
+    if (currentPage === totalPages) return;
+    setSearchParams({ page: currentPage + 1 });
+  }
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (totalPages > 0) {
+      if (isNaN(currentPage) || currentPage < 1 || currentPage > totalPages) {
+        navigate("/parks");
+      }
+    }
+  }, [currentPage, totalPages, navigate]);
 
   const titleAndSearchFields = (
     <>
@@ -118,22 +146,43 @@ function Parks() {
         />
       ) : (
         <div>
-          {parks.map((park) => {
-            return (
-              <div className={ParksStyles.parkListContainer} key={park.id}>
-                <figure className={ParksStyles.figure}>
-                  <img
-                    className={ParksStyles.img}
-                    src={park.images[0].url}
-                    alt={park.fullName}
-                  />
-                </figure>
-                <p>
-                  {park.fullName}, {park.states}
-                </p>
-              </div>
-            );
-          })}
+          {parks
+            .slice(indexOfFirstPark, indexOfFirstPark + itemsPerPage)
+            .map((park) => {
+              return (
+                <div className={ParksStyles.parkListContainer} key={park.id}>
+                  <figure className={ParksStyles.figure}>
+                    <img
+                      className={ParksStyles.img}
+                      src={park.images[0].url}
+                      alt={park.fullName}
+                    />
+                  </figure>
+                  <p>
+                    {park.fullName}, {park.states}
+                  </p>
+                </div>
+              );
+            })}
+          <div className={ParksStyles.paginationControls}>
+            <button
+              className={ParksStyles.paginationBtn}
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span className={ParksStyles.spanOfPageCount}>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              className={ParksStyles.paginationBtn}
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </div>
       )}
     </main>
