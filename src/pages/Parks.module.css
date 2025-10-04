@@ -1,7 +1,5 @@
 .main {
-  /* border: 2px solid lightgreen; */
-  width: 700px;
-  max-width: 100%;
+  border: 2px solid red;
 }
 
 .adventureTitle {
@@ -10,30 +8,20 @@
 
 .searchContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 2em 0 4em;
-  gap: 1em;
+  margin: 2em 0;
 }
 
-.searchPark,
-.selectBtn {
+.searchPark {
   border-radius: 12px;
   border: 2px solid #6fbf73;
   padding: 1em;
   color: #6fbf73;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex: 1;
 }
 
-.selectBtn {
-  border: 2px solid #6fbf73;
-  color: #6fbf73;
-}
-
-.searchPark:hover,
-.selectBtn:hover {
+.searchPark:hover {
   color: #ffa500;
   border: 2px solid #ffa500;
 }
@@ -42,24 +30,32 @@
   color: #ffa500;
 }
 
-.searchPark {
-  flex: 1;
-}
-
 .loadingContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.3em;
+  border: 2px solid blue;
 }
 
 .parkListContainer {
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
   align-items: center;
   gap: 1em;
   margin-bottom: 1.5em;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0.5em;
+}
+
+.parkListContainer:hover {
+  border: 2px solid #ffa500;
+  color: #ffa500;
 }
 
 .figure {
@@ -95,5 +91,5 @@
 
 .paginationBtn:hover {
   color: #ffa500;
-  border: 2px solid transparent;
+  border: 2px solid #ffa500;
 }

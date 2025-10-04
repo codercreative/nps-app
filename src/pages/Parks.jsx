@@ -1,40 +1,40 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate, useSearchParams } from "react-router";
-import ParkCard from "../features/Parks/ParkCard.jsx";
+import { Link, useNavigate, useSearchParams } from "react-router";
+import Park from "../features/Parks/Park.jsx";
 import ParksStyles from "./Parks.module.css";
 
-function Parks() {
-  const [parks, setParks] = useState([]);
+function Parks({ parks, isLoading }) {
+  // const [parks, setParks] = useState([]);
   const [userInputText, setUserInputText] = useState("");
   const [matchedPark, setMatchedPark] = useState(null);
   const [selectedPark, setSelectedPark] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  const baseURL = "https://developer.nps.gov/api/v1";
-  const endpoint = {
-    parks: `${baseURL}/parks`,
-  };
+  // const baseURL = "https://developer.nps.gov/api/v1";
+  // const endpoint = {
+  //   parks: `${baseURL}/parks`,
+  // };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`${endpoint.parks}?limit=500`, {
-        headers: {
-          "X-Api-Key": import.meta.env.VITE_API_KEY,
-        },
-      });
-      const json = await result.json();
-      console.log(json);
-      setParks(json.data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await fetch(`${endpoint.parks}?limit=500`, {
+  //       headers: {
+  //         "X-Api-Key": import.meta.env.VITE_API_KEY,
+  //       },
+  //     });
+  //     const json = await result.json();
+  //     console.log(json);
+  //     setParks(json.data);
+  //     setIsLoading(false);
+  //   };
+  //   fetchData();
+  // }, []);
 
   function handleEnterKey(e) {
     console.log(e);
     if (e.key === "Enter") {
       if (matchedPark) {
-        handleSelectedPark(matchedPark);
+        // handleSelectedPark(matchedPark);
         setUserInputText("");
       }
     }
@@ -52,13 +52,16 @@ function Parks() {
     setMatchedPark(parkMatch);
   }
 
-  function handleSelectedPark(park) {
-    setSelectedPark(park);
-    setUserInputText("");
+  // function handleSelectedPark(park) {
+  //   setSelectedPark(park);
+  //   setUserInputText("");
+  // }
+
+  function handleClickPark(park) {
+    navigate(`/parks/${park.parkCode}`, { state: { park } });
   }
 
   const [searchParams, setSearchParams] = useSearchParams();
-
   const itemsPerPage = 5;
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const indexOfFirstPark = (currentPage - 1) * itemsPerPage;
@@ -84,8 +87,19 @@ function Parks() {
     }
   }, [currentPage, totalPages, navigate]);
 
-  const titleAndSearchFields = (
-    <>
+  if (isLoading) {
+    return (
+      <main className={ParksStyles.main}>
+        <div className={ParksStyles.loadingContainer}>
+          <i className="fa-solid fa-spinner"></i>
+          <h2>Loading parks...</h2>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className={ParksStyles.main}>
       <h2 className={ParksStyles.adventureTitle}>Find your next adventure!</h2>
       <p>Search by name or select a park from the list below.</p>
       <div className={ParksStyles.searchContainer}>
@@ -97,35 +111,10 @@ function Parks() {
           onChange={handleSearchPark}
           onKeyDown={handleEnterKey}
         />
-
-        <button
-          className={ParksStyles.selectBtn}
-          onClick={() => handleSelectedPark(matchedPark)}
-        >
-          Select
-        </button>
       </div>
-    </>
-  );
-
-  if (isLoading) {
-    return (
-      <main className={ParksStyles.main}>
-        {titleAndSearchFields}
-        <div className={ParksStyles.loadingContainer}>
-          <i className="fa-solid fa-spinner"></i>
-          <p>Loading parks...</p>
-        </div>
-      </main>
-    );
-  }
-
-  return (
-    <main className={ParksStyles.main}>
-      {titleAndSearchFields}
 
       {selectedPark ? (
-        <ParkCard
+        <Park
           key={selectedPark.id}
           park={selectedPark}
           name={selectedPark.fullName}
@@ -134,23 +123,17 @@ function Parks() {
           imageTitle={selectedPark.images[0].title}
           imageCredit={selectedPark.images[0].credit}
         />
-      ) : matchedPark ? (
-        <ParkCard
-          key={matchedPark.id}
-          park={matchedPark}
-          name={matchedPark.fullName}
-          altName={matchedPark.images[0].altText}
-          image={matchedPark.images[0].url}
-          imageTitle={matchedPark.images[0].title}
-          imageCredit={matchedPark.images[0].credit}
-        />
       ) : (
         <div>
           {parks
             .slice(indexOfFirstPark, indexOfFirstPark + itemsPerPage)
             .map((park) => {
               return (
-                <div className={ParksStyles.parkListContainer} key={park.id}>
+                <Link
+                  key={park.id}
+                  className={ParksStyles.parkListContainer}
+                  to={`/parks/${park.parkCode}`}
+                >
                   <figure className={ParksStyles.figure}>
                     <img
                       className={ParksStyles.img}
@@ -161,7 +144,7 @@ function Parks() {
                   <p>
                     {park.fullName}, {park.states}
                   </p>
-                </div>
+                </Link>
               );
             })}
           <div className={ParksStyles.paginationControls}>

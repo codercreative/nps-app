@@ -12,10 +12,9 @@ body {
 
   line-height: 1.5;
   font-family: "Funnel Display", sans-serif;
-  color: #fffbf9;
   color: #6fbf73;
   /* border: 2px solid lightblue; */
-  height: 80vh;
+  /* height: 80vh; */
 }
 
 /* ========== headings ========== */

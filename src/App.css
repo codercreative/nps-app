@@ -4,12 +4,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 90%;
   margin: 0 auto;
+  padding: 0 1em;
 }
-
-/* @media (max-width: 767px) {
-  .appContainer {
-    width: 90%;
-  }
-} */
