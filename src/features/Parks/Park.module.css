@@ -1,26 +1,25 @@
-.loveParkContainer {
+.parkSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 0.3em;
+  max-width: 700px;
+  border: 2px solid red;
+}
+
+.parkTitleIconContainer {
   display: flex;
   align-items: center;
-  gap: 1em;
+  gap: 0.3em;
+}
+
+.parkTitle {
+  font-size: 1.3rem;
 }
 
 .loveIcon {
   cursor: pointer;
   font-size: 1.3rem;
-}
-
-.backBtn {
-  color: #6fbf73;
-  padding: 0.5em 1em;
-  border: 2px solid #6fbf73;
-  margin-left: 0.5em;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.backBtn:hover {
-  color: #ffa500;
-  border: 2px solid #ffa500;
 }
 
 .figure {
@@ -33,7 +32,7 @@
 }
 
 .parkImg {
-  width: 20em;
+  width: 100%;
   object-fit: cover;
   cursor: pointer;
   border-radius: 12px;

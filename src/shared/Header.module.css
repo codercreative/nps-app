@@ -1,20 +1,20 @@
 .header {
   margin: 2em;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   min-width: 100%;
-  /* max-width: 1200px; */
-}
-
-.logoTitle {
-  display: flex;
-  align-items: center;
 }
 
 .treeIcon {
-  font-size: 1.6em;
+  font-size: 1.2em;
   margin-right: 0.2em;
+}
+.logoTitle {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
 }
 
 .nav {
@@ -47,16 +47,12 @@
   color: #ffa500;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 767px) {
   .header {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .treeIcon {
-    font-size: 1.2em;
-  }
-
-  .title {
-    font-size: 1.8rem;
+    font-size: 1.6em;
   }
 }

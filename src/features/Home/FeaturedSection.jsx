@@ -12,7 +12,7 @@ function FeaturedSection() {
         />
         <NavLink className={FeaturedStyles.ctaBtn} to="/parks">
           <i className={`fa-solid fa-person-hiking`}></i>
-          <span>Start exploring all parks </span>
+          <span>Start exploring </span>
         </NavLink>
         <figcaption className={FeaturedStyles.figCaption}>
           Yosemite National Park | Credit: NPS Photo.

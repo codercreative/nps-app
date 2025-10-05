@@ -101,7 +101,15 @@ function Parks({ parks, isLoading }) {
   return (
     <main className={ParksStyles.main}>
       <h2 className={ParksStyles.adventureTitle}>Find your next adventure!</h2>
-      <p>Search by name or select a park from the list below.</p>
+      <p>
+        Explore the beauty of the US national parks! Whether you are looking for
+        towering mountains, vast deserts, lush forests, or sparkling lakes, you
+        will find it here. Use the search bar to quickly find a specific park,
+        or browse the full list to discover your next adventure. You can also
+        save parks you love to My Parks to keep track of your favorites and plan
+        future visits.
+      </p>
+
       <div className={ParksStyles.searchContainer}>
         <input
           className={ParksStyles.searchPark}

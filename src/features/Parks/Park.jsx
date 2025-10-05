@@ -23,35 +23,33 @@ function Park({ park, setSelectedPark }) {
 
   return (
     <>
-      <div className={ParkStyles.loveParkContainer}>
-        <i
-          className={`${ParkStyles.loveIcon} fa-heart ${
-            isLoved ? "fa-solid" : "fa-regular"
-          }`}
-          onClick={() => setIsLoved(!isLoved)}
-        ></i>
-        <h2>{name}</h2>
-        <button
-          className={ParkStyles.backBtn}
-          onClick={() => setSelectedPark(null)}
-        >
-          Back to all parks
-        </button>
-      </div>
+      <section className={ParkStyles.parkSection}>
+        <div className={ParkStyles.parkTitleIconContainer}>
+          <i
+            className={`${ParkStyles.loveIcon} fa-heart ${
+              isLoved ? "fa-solid" : "fa-regular"
+            }`}
+            onClick={() => setIsLoved(!isLoved)}
+          ></i>
+          <h2 className={ParkStyles.parkTitle}>{name}</h2>
+        </div>
 
-      <div>
-        <figure className={ParkStyles.figure}>
-          <img className={ParkStyles.parkImg} src={image} alt={altName} />
-          <figcaption className={ParkStyles.figCaption}>
-            {imageTitle}
-          </figcaption>
-          <figcaption className={ParkStyles.figCaption}>
-            Credit: {imageCredit}
-          </figcaption>
-        </figure>
-      </div>
-      <h3>Check out the information below to plan your visit.</h3>
-      <h3>List of fun park adventures to be added......</h3>
+        <div>
+          <figure className={ParkStyles.figure}>
+            <img className={ParkStyles.parkImg} src={image} alt={altName} />
+            <figcaption className={ParkStyles.figCaption}>
+              {imageTitle}
+            </figcaption>
+            <figcaption className={ParkStyles.figCaption}>
+              Credit: {imageCredit}
+            </figcaption>
+          </figure>
+        </div>
+        <div>
+          <h3>Check out the information below to plan your visit.</h3>
+          <h3>List of fun park adventures to be added......</h3>
+        </div>
+      </section>
     </>
   );
 }

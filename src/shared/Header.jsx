@@ -20,16 +20,7 @@ function Header({ title }) {
         >
           Home
         </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            `${isActive ? HeaderStyles.active : HeaderStyles.inactive} ${
-              HeaderStyles.navLink
-            }`
-          }
-          to="/about"
-        >
-          About
-        </NavLink>
+
         <NavLink
           className={({ isActive }) =>
             `${isActive ? HeaderStyles.active : HeaderStyles.inactive} ${
@@ -39,6 +30,16 @@ function Header({ title }) {
           to="/parks"
         >
           Parks
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            `${isActive ? HeaderStyles.active : HeaderStyles.inactive} ${
+              HeaderStyles.navLink
+            }`
+          }
+          to="/myparks"
+        >
+          My Parks
         </NavLink>
       </nav>
     </header>

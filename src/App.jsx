@@ -5,7 +5,7 @@ import { Routes, Route, useLocation } from "react-router";
 import "./App.css";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
-import About from "./pages/About";
+import MyParks from "./pages/MyParks";
 import Parks from "./pages/Parks";
 import NotFound from "./pages/NotFound";
 import FeaturedSection from "./features/Home/FeaturedSection";
@@ -47,16 +47,17 @@ function App() {
         document.title = "US National Parks";
         setHeaderTitle("US National Parks");
         break;
-      case path === "/about":
-        document.title = "About";
-        setHeaderTitle("About");
-        break;
       case path === "/parks":
         document.title = "Parks";
         setHeaderTitle("Parks");
         break;
+
       case path.startsWith("/parks/"):
         setHeaderTitle("Park");
+        break;
+      case path === "/myparks":
+        document.title = "My Parks";
+        setHeaderTitle("My Parks");
         break;
       default:
         document.title = "Not Found";
@@ -69,7 +70,7 @@ function App() {
       <Header title={headerTitle} />
       <Routes>
         <Route path="/" element={<FeaturedSection />} />
-        <Route path="/about" element={<About />} />
+
         <Route
           path="/parks"
           element={<Parks parks={parks} isLoading={isLoading} />}
@@ -78,6 +79,7 @@ function App() {
           path="/parks/:parkCode"
           element={<SingleParkRoute parks={parks} />}
         ></Route>
+        <Route path="/myparks" element={<MyParks />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
