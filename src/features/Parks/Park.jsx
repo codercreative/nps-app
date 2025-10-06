@@ -16,6 +16,7 @@ function Park({ park, setSelectedPark }) {
   // />
 
   const name = park.fullName;
+  const state = park.states;
   const altName = park.fullName;
   const image = park.images[0].url;
   const imageTitle = park.images[0].title;
@@ -31,7 +32,9 @@ function Park({ park, setSelectedPark }) {
             }`}
             onClick={() => setIsLoved(!isLoved)}
           ></i>
-          <h2 className={ParkStyles.parkTitle}>{name}</h2>
+          <h2 className={ParkStyles.parkTitle}>
+            {name}, {state.split(",").join(", ")}
+          </h2>
         </div>
 
         <div>

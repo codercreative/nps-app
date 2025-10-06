@@ -4,7 +4,8 @@
 
 .searchContainer {
   display: flex;
-  margin: 2em 0;
+
+  margin: 2em 0 0.7em;
 }
 
 .searchPark {
@@ -26,6 +27,11 @@
   color: #ffa500;
 }
 
+.errorMsg {
+  color: #ff6565;
+  text-align: center;
+}
+
 .loadingContainer {
   display: flex;
   justify-content: center;
@@ -39,7 +45,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 1em;
-  margin-bottom: 1.5em;
+  margin: 1.5em 0;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;

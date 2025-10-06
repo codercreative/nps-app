@@ -4,37 +4,13 @@ import Park from "../features/Parks/Park.jsx";
 import ParksStyles from "./Parks.module.css";
 
 function Parks({ parks, isLoading }) {
-  // const [parks, setParks] = useState([]);
   const [userInputText, setUserInputText] = useState("");
   const [matchedPark, setMatchedPark] = useState(null);
-  const [selectedPark, setSelectedPark] = useState(null);
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // const baseURL = "https://developer.nps.gov/api/v1";
-  // const endpoint = {
-  //   parks: `${baseURL}/parks`,
-  // };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await fetch(`${endpoint.parks}?limit=500`, {
-  //       headers: {
-  //         "X-Api-Key": import.meta.env.VITE_API_KEY,
-  //       },
-  //     });
-  //     const json = await result.json();
-  //     console.log(json);
-  //     setParks(json.data);
-  //     setIsLoading(false);
-  //   };
-  //   fetchData();
-  // }, []);
 
   function handleEnterKey(e) {
     console.log(e);
     if (e.key === "Enter") {
       if (matchedPark) {
-        // handleSelectedPark(matchedPark);
         setUserInputText("");
       }
     }
@@ -44,18 +20,16 @@ function Parks({ parks, isLoading }) {
     const userInput = e.target.value.toLowerCase();
     setUserInputText(userInput);
 
-    const parkMatch = parks.find((park) => {
+    const filterPark = parks.filter((park) => {
       const parkTitle = park.fullName.toLowerCase();
       return parkTitle.includes(userInput);
     });
-
-    setMatchedPark(parkMatch);
+    if (filterPark.length > 0) {
+      setMatchedPark(filterPark);
+    } else {
+      setMatchedPark([]);
+    }
   }
-
-  // function handleSelectedPark(park) {
-  //   setSelectedPark(park);
-  //   setUserInputText("");
-  // }
 
   function handleClickPark(park) {
     navigate(`/parks/${park.parkCode}`, { state: { park } });
@@ -115,24 +89,37 @@ function Parks({ parks, isLoading }) {
           className={ParksStyles.searchPark}
           type="text"
           placeholder="Search by park name"
+          aria-label="Search by park name"
           value={userInputText}
           onChange={handleSearchPark}
           onKeyDown={handleEnterKey}
         />
       </div>
 
-      {selectedPark ? (
-        <Park
-          key={selectedPark.id}
-          park={selectedPark}
-          name={selectedPark.fullName}
-          altName={selectedPark.images[0].altText}
-          image={selectedPark.images[0].url}
-          imageTitle={selectedPark.images[0].title}
-          imageCredit={selectedPark.images[0].credit}
-        />
+      {matchedPark && matchedPark.length > 0 ? (
+        matchedPark.map((park) => (
+          <Link
+            key={park.id}
+            className={ParksStyles.parkListContainer}
+            to={`/parks/${park.parkCode}`}
+          >
+            <figure className={ParksStyles.figure}>
+              <img
+                className={ParksStyles.img}
+                src={park.images[0].url}
+                alt={park.fullName}
+              />
+            </figure>
+            <p>
+              {park.fullName}, {park.states.split(",").join(", ")}
+            </p>
+          </Link>
+        ))
       ) : (
         <div>
+          <p className={ParksStyles.errorMsg}>
+            No parks are matching your search...Try again.
+          </p>
           {parks
             .slice(indexOfFirstPark, indexOfFirstPark + itemsPerPage)
             .map((park) => {
@@ -150,7 +137,7 @@ function Parks({ parks, isLoading }) {
                     />
                   </figure>
                   <p>
-                    {park.fullName}, {park.states}
+                    {park.fullName}, {park.states.split(",").join(", ")}
                   </p>
                 </Link>
               );
