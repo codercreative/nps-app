@@ -2,18 +2,8 @@ import { useState } from "react";
 
 import ParkStyles from "./Park.module.css";
 
-function Park({ park, setSelectedPark }) {
+function Park({ park }) {
   const [isLoved, setIsLoved] = useState(false);
-
-  //   <Park
-  //   key={selectedPark.id}
-  //   park={selectedPark}
-  //   name={selectedPark.fullName}
-  //   altName={selectedPark.images[0].altText}
-  //   image={selectedPark.images[0].url}
-  //   imageTitle={selectedPark.images[0].title}
-  //   imageCredit={selectedPark.images[0].credit}
-  // />
 
   const name = park.fullName;
   const state = park.states;

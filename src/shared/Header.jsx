@@ -22,14 +22,16 @@ function Header({ title }) {
         </NavLink>
 
         <NavLink
+          // Adding "end" after to=/parks shows All Parks as inactive in the Header, so user can click back to view all parks
           className={({ isActive }) =>
             `${isActive ? HeaderStyles.active : HeaderStyles.inactive} ${
               HeaderStyles.navLink
             }`
           }
           to="/parks"
+          end
         >
-          Parks
+          All Parks
         </NavLink>
         <NavLink
           className={({ isActive }) =>

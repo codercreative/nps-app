@@ -15,6 +15,22 @@ function App() {
   const [parks, setParks] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [myParks, setMyParks] = useState([]);
+
+  //=============== Toggle heart ===============
+
+  function handleMyParks(parks) {
+    const isPark = myParks.find((park) => parks.id === park.id);
+
+    if (isPark) {
+      const myParksWithoutThisPark = myParks.filter(
+        (park) => parks.id !== park.id
+      );
+      setMyParks(myParksWithoutThisPark);
+    } else if (!isPark) {
+      setMyParks((prev) => [...prev, parks]);
+    }
+  }
 
   //=============== USE EFFECT ===============
 
@@ -48,8 +64,8 @@ function App() {
         setHeaderTitle("US National Parks");
         break;
       case path === "/parks":
-        document.title = "Parks";
-        setHeaderTitle("Parks");
+        document.title = "All Parks";
+        setHeaderTitle("All Parks");
         break;
 
       case path.startsWith("/parks/"):

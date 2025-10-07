@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
-import Park from "../features/Parks/Park.jsx";
 import ParksStyles from "./Parks.module.css";
 
 function Parks({ parks, isLoading }) {
   const [userInputText, setUserInputText] = useState("");
-  const [matchedPark, setMatchedPark] = useState(null);
+  const [matchedPark, setMatchedPark] = useState([]);
 
   function handleEnterKey(e) {
-    console.log(e);
     if (e.key === "Enter") {
       if (matchedPark) {
         setUserInputText("");
@@ -26,13 +24,9 @@ function Parks({ parks, isLoading }) {
     });
     if (filterPark.length > 0) {
       setMatchedPark(filterPark);
-    } else {
+    } else if (!matchedPark && userInputText.length > 0) {
       setMatchedPark([]);
     }
-  }
-
-  function handleClickPark(park) {
-    navigate(`/parks/${park.parkCode}`, { state: { park } });
   }
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -117,9 +111,6 @@ function Parks({ parks, isLoading }) {
         ))
       ) : (
         <div>
-          <p className={ParksStyles.errorMsg}>
-            No parks are matching your search...Try again.
-          </p>
           {parks
             .slice(indexOfFirstPark, indexOfFirstPark + itemsPerPage)
             .map((park) => {
