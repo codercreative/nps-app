@@ -15,7 +15,11 @@ function App() {
   const [parks, setParks] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [mySavedParks, setMySavedParks] = useState([]);
+  const [mySavedParks, setMySavedParks] = useState(
+    localStorage.getItem("Saved Parks")
+      ? JSON.parse(localStorage.getItem("Saved Parks"))
+      : []
+  );
 
   function isParkSaved(parks) {
     return mySavedParks.some((p) => p.id === parks.id);
@@ -81,6 +85,21 @@ function App() {
         setHeaderTitle("Not Found");
     }
   }, [location]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("Saved Parks")) === null) {
+      setMySavedParks([]);
+    } else {
+      const parsedJSONParkData = JSON.parse(
+        localStorage.getItem("Saved Parks")
+      );
+      setMySavedParks(parsedJSONParkData);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("Saved Parks", JSON.stringify(mySavedParks));
+  }, [mySavedParks]);
 
   return (
     <div className="appContainer">
