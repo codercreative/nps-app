@@ -17,22 +17,23 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [myParks, setMyParks] = useState([]);
 
-  //=============== Toggle heart ===============
+  function isParkSaved(parks) {
+    return myParks.some((p) => p.id === parks.id);
+  }
 
-  function handleMyParks(parks) {
-    const isPark = myParks.find((park) => parks.id === park.id);
-
-    if (isPark) {
+  function handleToggleMyParks(parks) {
+    const isParkAlreadySavedToMyParks = myParks.find(
+      (park) => parks.id === park.id
+    );
+    if (isParkAlreadySavedToMyParks) {
       const myParksWithoutThisPark = myParks.filter(
         (park) => parks.id !== park.id
       );
       setMyParks(myParksWithoutThisPark);
-    } else if (!isPark) {
+    } else if (!isParkAlreadySavedToMyParks) {
       setMyParks((prev) => [...prev, parks]);
     }
   }
-
-  //=============== USE EFFECT ===============
 
   const baseURL = "https://developer.nps.gov/api/v1";
   const endpoint = {
@@ -93,9 +94,24 @@ function App() {
         />
         <Route
           path="/parks/:parkCode"
-          element={<SingleParkRoute parks={parks} />}
+          element={
+            <SingleParkRoute
+              parks={parks}
+              isParkSaved={isParkSaved}
+              handleToggleMyParks={handleToggleMyParks}
+            />
+          }
         ></Route>
-        <Route path="/myparks" element={<MyParks />} />
+        <Route
+          path="/myparks"
+          element={
+            <MyParks
+              myParks={myParks}
+              isParkSaved={isParkSaved}
+              handleToggleMyParks={handleToggleMyParks}
+            />
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

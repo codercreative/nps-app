@@ -1,6 +1,8 @@
+import Park from "../features/Parks/Park.jsx";
+
 import MyParksStyles from "./MyParks.module.css";
 
-function MyParks({ handleMyParks, park, myParks, setMyParks }) {
+function MyParks({ myParks, isParkSaved, handleToggleMyParks }) {
   return (
     <main className={MyParksStyles.main}>
       <div>
@@ -10,7 +12,16 @@ function MyParks({ handleMyParks, park, myParks, setMyParks }) {
           details, or tap the heart icon to remove it from your list.
         </p>
       </div>
-      <div></div>
+      <div>
+        {myParks.map((park) => (
+          <Park
+            key={park.id}
+            park={park}
+            isParkSaved={isParkSaved}
+            handleToggleMyParks={handleToggleMyParks}
+          />
+        ))}
+      </div>
     </main>
   );
 }

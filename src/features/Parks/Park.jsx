@@ -2,9 +2,7 @@ import { useState } from "react";
 
 import ParkStyles from "./Park.module.css";
 
-function Park({ park }) {
-  const [isLoved, setIsLoved] = useState(false);
-
+function Park({ park, isParkSaved, handleToggleMyParks }) {
   const name = park.fullName;
   const state = park.states;
   const altName = park.fullName;
@@ -18,9 +16,10 @@ function Park({ park }) {
         <div className={ParkStyles.parkTitleIconContainer}>
           <i
             className={`${ParkStyles.loveIcon} fa-heart ${
-              isLoved ? "fa-solid" : "fa-regular"
+              isParkSaved(park) ? "fa-solid" : "fa-regular"
+            } 
             }`}
-            onClick={() => setIsLoved(!isLoved)}
+            onClick={() => handleToggleMyParks(park)}
           ></i>
           <h2 className={ParkStyles.parkTitle}>
             {name}, {state.split(",").join(", ")}

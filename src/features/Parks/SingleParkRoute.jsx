@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import Park from "./Park.jsx";
 
-function SingleParkRoute({ parks }) {
+function SingleParkRoute({ parks, isParkSaved, handleToggleMyParks }) {
   const { parkCode } = useParams();
   console.log(parkCode);
 
@@ -13,7 +13,11 @@ function SingleParkRoute({ parks }) {
 
   return (
     <>
-      <Park park={park} />
+      <Park
+        park={park}
+        isParkSaved={isParkSaved}
+        handleToggleMyParks={handleToggleMyParks}
+      />
     </>
   );
 }
