@@ -2,7 +2,7 @@ import Park from "../features/Parks/Park.jsx";
 
 import MyParksStyles from "./MyParks.module.css";
 
-function MyParks({ myParks, isParkSaved, handleToggleMyParks }) {
+function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
   return (
     <main className={MyParksStyles.main}>
       <div>
@@ -13,12 +13,12 @@ function MyParks({ myParks, isParkSaved, handleToggleMyParks }) {
         </p>
       </div>
       <div>
-        {myParks.map((park) => (
+        {mySavedParks.map((park) => (
           <Park
             key={park.id}
             park={park}
             isParkSaved={isParkSaved}
-            handleToggleMyParks={handleToggleMyParks}
+            handleToggleMySavedParks={handleToggleMySavedParks}
           />
         ))}
       </div>

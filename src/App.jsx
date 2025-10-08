@@ -15,23 +15,23 @@ function App() {
   const [parks, setParks] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [myParks, setMyParks] = useState([]);
+  const [mySavedParks, setMySavedParks] = useState([]);
 
   function isParkSaved(parks) {
-    return myParks.some((p) => p.id === parks.id);
+    return mySavedParks.some((p) => p.id === parks.id);
   }
 
-  function handleToggleMyParks(parks) {
-    const isParkAlreadySavedToMyParks = myParks.find(
-      (park) => parks.id === park.id
+  function handleToggleMySavedParks(savedPark) {
+    const isParkAlreadySavedToMyParks = mySavedParks.find(
+      (park) => savedPark.id === park.id
     );
     if (isParkAlreadySavedToMyParks) {
-      const myParksWithoutThisPark = myParks.filter(
-        (park) => parks.id !== park.id
+      const myParksWithoutThisPark = mySavedParks.filter(
+        (park) => savedPark.id !== park.id
       );
-      setMyParks(myParksWithoutThisPark);
+      setMySavedParks(myParksWithoutThisPark);
     } else if (!isParkAlreadySavedToMyParks) {
-      setMyParks((prev) => [...prev, parks]);
+      setMySavedParks((prev) => [...prev, savedPark]);
     }
   }
 
@@ -98,7 +98,7 @@ function App() {
             <SingleParkRoute
               parks={parks}
               isParkSaved={isParkSaved}
-              handleToggleMyParks={handleToggleMyParks}
+              handleToggleMySavedParks={handleToggleMySavedParks}
             />
           }
         ></Route>
@@ -106,9 +106,9 @@ function App() {
           path="/myparks"
           element={
             <MyParks
-              myParks={myParks}
+              mySavedParks={mySavedParks}
               isParkSaved={isParkSaved}
-              handleToggleMyParks={handleToggleMyParks}
+              handleToggleMySavedParks={handleToggleMySavedParks}
             />
           }
         />

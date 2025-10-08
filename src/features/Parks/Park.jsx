@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import ParkStyles from "./Park.module.css";
 
-function Park({ park, isParkSaved, handleToggleMyParks }) {
+function Park({ park, isParkSaved, handleToggleMySavedParks }) {
   const name = park.fullName;
   const state = park.states;
   const altName = park.fullName;
@@ -19,7 +19,7 @@ function Park({ park, isParkSaved, handleToggleMyParks }) {
               isParkSaved(park) ? "fa-solid" : "fa-regular"
             } 
             }`}
-            onClick={() => handleToggleMyParks(park)}
+            onClick={() => handleToggleMySavedParks(park)}
           ></i>
           <h2 className={ParkStyles.parkTitle}>
             {name}, {state.split(",").join(", ")}
