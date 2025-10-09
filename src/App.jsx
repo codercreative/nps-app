@@ -1,6 +1,6 @@
 //ok to use App.css instead of styled components or css module??
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Routes, Route, useLocation } from "react-router";
 import "./App.css";
 import Header from "./shared/Header";
@@ -25,19 +25,22 @@ function App() {
     return mySavedParks.some((p) => p.id === parks.id);
   }
 
-  function handleToggleMySavedParks(savedPark) {
-    const isParkAlreadySavedToMyParks = mySavedParks.find(
-      (park) => savedPark.id === park.id
-    );
-    if (isParkAlreadySavedToMyParks) {
-      const myParksWithoutThisPark = mySavedParks.filter(
-        (park) => savedPark.id !== park.id
+  const handleToggleMySavedParks = useCallback(
+    (savedPark) => {
+      const isParkAlreadySavedToMyParks = mySavedParks.find(
+        (park) => savedPark.id === park.id
       );
-      setMySavedParks(myParksWithoutThisPark);
-    } else if (!isParkAlreadySavedToMyParks) {
-      setMySavedParks((prev) => [...prev, savedPark]);
-    }
-  }
+      if (isParkAlreadySavedToMyParks) {
+        const myParksWithoutThisPark = mySavedParks.filter(
+          (park) => savedPark.id !== park.id
+        );
+        setMySavedParks(myParksWithoutThisPark);
+      } else if (!isParkAlreadySavedToMyParks) {
+        setMySavedParks((prev) => [...prev, savedPark]);
+      }
+    },
+    [mySavedParks]
+  );
 
   const baseURL = "https://developer.nps.gov/api/v1";
   const endpoint = {
