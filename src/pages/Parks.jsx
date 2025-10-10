@@ -6,14 +6,6 @@ function Parks({ parks, isLoading }) {
   const [userInputText, setUserInputText] = useState("");
   const [matchedPark, setMatchedPark] = useState([]);
 
-  function handleEnterKey(e) {
-    if (e.key === "Enter") {
-      if (matchedPark) {
-        setUserInputText("");
-      }
-    }
-  }
-
   function handleSearchPark(e) {
     const userInput = e.target.value.toLowerCase();
     setUserInputText(userInput);
@@ -86,7 +78,6 @@ function Parks({ parks, isLoading }) {
           aria-label="Search by park name"
           value={userInputText}
           onChange={handleSearchPark}
-          onKeyDown={handleEnterKey}
         />
       </div>
 

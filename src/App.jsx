@@ -9,7 +9,7 @@ import MyParks from "./pages/MyParks";
 import Parks from "./pages/Parks";
 import NotFound from "./pages/NotFound";
 import FeaturedSection from "./features/Home/FeaturedSection";
-import SingleParkRoute from "./features/Parks/SingleParkRoute";
+import SinglePark from "./features/Parks/SinglePark";
 
 function App() {
   const [parks, setParks] = useState([]);
@@ -117,7 +117,7 @@ function App() {
         <Route
           path="/parks/:parkCode"
           element={
-            <SingleParkRoute
+            <SinglePark
               parks={parks}
               isParkSaved={isParkSaved}
               handleToggleMySavedParks={handleToggleMySavedParks}

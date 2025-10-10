@@ -1,9 +1,8 @@
 import { useParams } from "react-router";
-import Park from "./Park.jsx";
+import Park from "./ParkDetails.jsx";
 
-function SingleParkRoute({ parks, isParkSaved, handleToggleMySavedParks }) {
+function SinglePark({ parks, isParkSaved, handleToggleMySavedParks }) {
   const { parkCode } = useParams();
-  console.log(parkCode);
 
   const park = parks.find((park) => park.parkCode === parkCode);
 
@@ -22,4 +21,4 @@ function SingleParkRoute({ parks, isParkSaved, handleToggleMySavedParks }) {
   );
 }
 
-export default SingleParkRoute;
+export default SinglePark;

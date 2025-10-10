@@ -18,7 +18,6 @@ function FeaturedSection() {
           Yosemite National Park | Credit: NPS Photo.
         </figcaption>
       </figure>
-      <form action="email">Sign up for our newsletter</form>
     </section>
   );
 }

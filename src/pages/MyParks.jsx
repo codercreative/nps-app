@@ -1,4 +1,4 @@
-import Park from "../features/Parks/Park.jsx";
+import ParkDetails from "../features/Parks/ParkDetails.jsx";
 import IntroTextWrapper from "../shared/IntroTextWrapper.jsx";
 
 import MyParksStyles from "./MyParks.module.css";
@@ -15,7 +15,7 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
       </IntroTextWrapper>
       <div>
         {mySavedParks.map((park) => (
-          <Park
+          <ParkDetails
             key={park.id}
             park={park}
             isParkSaved={isParkSaved}

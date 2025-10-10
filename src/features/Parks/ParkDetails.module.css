@@ -20,8 +20,12 @@
   font-size: 1.3rem;
 }
 
-.loveIcon {
+.heartBtn {
+  all: unset;
   cursor: pointer;
+}
+
+.loveIcon {
   font-size: 1.3rem;
 }
 
