@@ -8,8 +8,6 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks }) {
   const imageTitle = park.images[0].title;
   const imageCredit = park.images[0].credit;
 
-  const [errorMsg, setErrorMsg] = useState("");
-
   return (
     <main className={ParkDetailsStyles.main}>
       <div className={ParkDetailsStyles.introSection}>

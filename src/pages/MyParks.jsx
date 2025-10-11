@@ -1,9 +1,12 @@
+import { useState } from "react";
 import ParkDetails from "../features/Parks/ParkDetails.jsx";
+import Parks from "./Parks.jsx";
 import IntroTextWrapper from "../shared/IntroTextWrapper.jsx";
-
 import MyParksStyles from "./MyParks.module.css";
 
 function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
+  const [showSelectedParkDetails, setShowSelectedParkDetails] = useState(null);
+
   return (
     <main className={MyParksStyles.main}>
       <IntroTextWrapper>
@@ -13,18 +16,72 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
           details, or tap the heart icon to remove it from your list.
         </p>
       </IntroTextWrapper>
-      <div>
-        {mySavedParks.map((park) => (
-          <ParkDetails
-            key={park.id}
-            park={park}
-            isParkSaved={isParkSaved}
-            handleToggleMySavedParks={handleToggleMySavedParks}
-          />
-        ))}
-      </div>
+
+      {mySavedParks.map((park) => (
+        <div key={park.id}>
+          {showSelectedParkDetails === park.id ? (
+            <ParkDetails
+              key={park.id}
+              park={park}
+              isParkSaved={isParkSaved}
+              handleToggleMySavedParks={handleToggleMySavedParks}
+            />
+          ) : (
+            <div className={MyParksStyles.heartAndParkWrapper}>
+              {/* HEART ICON */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleToggleMySavedParks(park);
+                }}
+                aria-label={
+                  isParkSaved(park)
+                    ? "Remove from My Parks page"
+                    : "Save to My Parks page"
+                }
+              >
+                <button className={MyParksStyles.heartBtn}>
+                  <i
+                    className={`${MyParksStyles.loveIcon} fa-heart ${
+                      isParkSaved(park) ? "fa-solid" : "fa-regular"
+                    }`}
+                  ></i>
+                </button>
+              </form>
+              {/* ====PARK INFO==== */}
+              <div
+                key={park.id}
+                className={MyParksStyles.parkListContainer}
+                onClick={() => setShowSelectedParkDetails(park.id)}
+              >
+                <figure className={MyParksStyles.figure}>
+                  <img
+                    className={MyParksStyles.img}
+                    src={park.images[0].url}
+                    alt={park.fullName}
+                  />
+                </figure>
+                <p>
+                  {park.fullName}, {park.states.split(",").join(", ")}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
     </main>
   );
 }
 
 export default MyParks;
+
+{
+  /* {mySavedParks.map((park) => (
+  <ParkDetails
+    key={park.id}
+    park={park}
+    isParkSaved={isParkSaved}
+    handleToggleMySavedParks={handleToggleMySavedParks}
+  />
+))} */
+}

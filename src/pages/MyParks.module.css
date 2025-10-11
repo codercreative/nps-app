@@ -1,3 +1,55 @@
 .main {
   max-width: 700px;
 }
+
+.heartAndParkWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.heartBtn {
+  all: unset;
+  cursor: pointer;
+}
+
+.loveIcon {
+  font-size: 1.8rem;
+}
+
+.parkListContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+  margin: 1.5em 0;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0.5em;
+  flex: 1;
+}
+
+.parkListContainer:hover {
+  border: 2px solid #ffa500;
+  color: #ffa500;
+}
+
+.figure {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
