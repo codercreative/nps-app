@@ -1,6 +1,6 @@
 import ParkDetailsStyles from "./ParkDetails.module.css";
 
-function ParkDetails({ park, isParkSaved, handleToggleMySavedParks }) {
+function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   const name = park.fullName;
   const state = park.states;
   const altName = park.fullName;
@@ -11,7 +11,10 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks }) {
   return (
     <main className={ParkDetailsStyles.main}>
       <div className={ParkDetailsStyles.introSection}>
-        <h2>{name}</h2>
+        <div>
+          <h2>{name}</h2>
+          {onBack && <button onClick={onBack}>Back</button>}
+        </div>
         <p>
           Find all the park details you need here to plan your visit. You can
           also save this park to the My Parks page for later reference by

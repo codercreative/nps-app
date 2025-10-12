@@ -7,27 +7,31 @@ import MyParksStyles from "./MyParks.module.css";
 function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
   const [showSelectedParkDetails, setShowSelectedParkDetails] = useState(null);
 
+  const userSelectedPark = mySavedParks.find(
+    (p) => p.id === showSelectedParkDetails
+  );
+
   return (
     <main className={MyParksStyles.main}>
-      <IntroTextWrapper>
-        <h2>My Favorite Parks</h2>
-        <p>
-          Here are your saved parks for quick access. Click any park to see more
-          details, or tap the heart icon to remove it from your list.
-        </p>
-      </IntroTextWrapper>
-
-      {mySavedParks.map((park) => (
-        <div key={park.id}>
-          {showSelectedParkDetails === park.id ? (
-            <ParkDetails
-              key={park.id}
-              park={park}
-              isParkSaved={isParkSaved}
-              handleToggleMySavedParks={handleToggleMySavedParks}
-            />
-          ) : (
-            <div className={MyParksStyles.heartAndParkWrapper}>
+      {showSelectedParkDetails ? (
+        <ParkDetails
+          key={showSelectedParkDetails}
+          park={userSelectedPark}
+          isParkSaved={isParkSaved}
+          handleToggleMySavedParks={handleToggleMySavedParks}
+          onBack={() => setShowSelectedParkDetails(null)}
+        />
+      ) : (
+        <>
+          <IntroTextWrapper>
+            <h2>My Favorite Parks</h2>
+            <p>
+              Here are your saved parks for quick access. Click any park to see
+              more details, or tap the heart icon to remove it from your list.
+            </p>
+          </IntroTextWrapper>
+          {mySavedParks.map((park) => (
+            <div key={park.id} className={MyParksStyles.heartAndParkWrapper}>
               {/* HEART ICON */}
               <form
                 onSubmit={(e) => {
@@ -66,9 +70,9 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
                 </p>
               </div>
             </div>
-          )}
-        </div>
-      ))}
+          ))}
+        </>
+      )}
     </main>
   );
 }
@@ -84,4 +88,18 @@ export default MyParks;
     handleToggleMySavedParks={handleToggleMySavedParks}
   />
 ))} */
+}
+
+{
+  /* 
+      {mySavedParks.map((park) => (
+        <div key={park.id}>
+          {showSelectedParkDetails === park.id ? (
+            <ParkDetails
+              key={park.id}
+              park={park}
+              isParkSaved={isParkSaved}
+              handleToggleMySavedParks={handleToggleMySavedParks}
+            />
+          )  */
 }
