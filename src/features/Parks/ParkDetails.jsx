@@ -11,14 +11,22 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   return (
     <main className={ParkDetailsStyles.main}>
       <div className={ParkDetailsStyles.introSection}>
-        <div>
+        <div className={ParkDetailsStyles.parkNameAndBackBtnWrapper}>
           <h2>{name}</h2>
-          {onBack && <button onClick={onBack}>Back</button>}
+          {onBack && (
+            <button className={ParkDetailsStyles.backBtn} onClick={onBack}>
+              Back to all My Parks
+            </button>
+          )}
         </div>
         <p>
-          Find all the park details you need here to plan your visit. You can
-          also save this park to the My Parks page for later reference by
-          clicking on the 💚 icon.
+          Find all the park details you need here to plan your visit.{" "}
+          {!isParkSaved(park) && (
+            <>
+              You can also save this park to the My Parks page for later
+              reference by clicking on the 💚 icon.
+            </>
+          )}
         </p>
       </div>
       <div className={ParkDetailsStyles.parkTitleIconContainer}>

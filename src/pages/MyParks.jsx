@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ParkDetails from "../features/Parks/ParkDetails.jsx";
-import Parks from "./Parks.jsx";
 import IntroTextWrapper from "../shared/IntroTextWrapper.jsx";
 import MyParksStyles from "./MyParks.module.css";
 
@@ -10,6 +9,10 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
   const userSelectedPark = mySavedParks.find(
     (p) => p.id === showSelectedParkDetails
   );
+
+  if (showSelectedParkDetails && !userSelectedPark) {
+    setShowSelectedParkDetails(null);
+  }
 
   return (
     <main className={MyParksStyles.main}>
