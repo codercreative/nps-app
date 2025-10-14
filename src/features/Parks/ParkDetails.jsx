@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import ParkDetailsStyles from "./ParkDetails.module.css";
 
 function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
@@ -8,6 +9,53 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   const imageTitle = park.images[0].title;
   const imageCredit = park.images[0].credit;
 
+  const [thingsTodoData, setThingsTodoData] = useState([]);
+  const [visitorCenters, setVisitorCenters] = useState([]);
+  const [isLoadingVisitorCenter, setIsLoadingVisitorCenter] = useState(true);
+  const [isLoadingThingsToDo, setIsLoadingThingsToDo] = useState(true);
+
+  const baseURL = "https://developer.nps.gov/api/v1";
+
+  const endpoints = {
+    thingstodo: (parkCode) => `${baseURL}/thingstodo?parkCode=${parkCode}`,
+    visitorcenters: (parkCode) =>
+      `${baseURL}/visitorcenters?parkCode=${parkCode}`,
+  };
+
+  useEffect(() => {
+    const fetchThingsToDoData = async () => {
+      const response = await fetch(endpoints.thingstodo(park.parkCode), {
+        headers: {
+          "X-Api-Key": import.meta.env.VITE_API_KEY,
+        },
+      });
+      const json = await response.json();
+      console.log(json);
+      setThingsTodoData(json.data);
+      setIsLoadingThingsToDo(false);
+    };
+    fetchThingsToDoData();
+  }, [park.parkCode]);
+
+  useEffect(() => {
+    const fetchVisitorCenters = async () => {
+      const response = await fetch(endpoints.visitorcenters(park.parkCode), {
+        headers: {
+          "X-Api-Key": import.meta.env.VITE_API_KEY,
+        },
+      });
+      const json = await response.json();
+      console.log(json);
+      setVisitorCenters(json.data);
+      setIsLoadingVisitorCenter(false);
+    };
+    fetchVisitorCenters();
+  }, [park.parkCode]);
+
+  const firstPhysicalAddress = visitorCenters.find(
+    (center) => center.addresses[0]?.type === "Physical"
+  );
+
   return (
     <main className={ParkDetailsStyles.main}>
       <div className={ParkDetailsStyles.introSection}>
@@ -15,7 +63,7 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
           <h2>{name}</h2>
           {onBack && (
             <button className={ParkDetailsStyles.backBtn} onClick={onBack}>
-              Back to all My Parks
+              Back to My Parks List
             </button>
           )}
         </div>
@@ -70,9 +118,52 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
           </figcaption>
         </figure>
       </div>
+      <div className={ParkDetailsStyles.visitorCenterWrapper}>
+        <h3>Visitor Center:</h3>
+        {isLoadingVisitorCenter ? (
+          <p>Loading visitor center details...</p>
+        ) : firstPhysicalAddress ? (
+          <>
+            <a
+              href={firstPhysicalAddress?.url}
+              target="_blank"
+              className={ParkDetailsStyles.visitorCenterName}
+            >
+              {firstPhysicalAddress.name}
+            </a>
+            {firstPhysicalAddress.name !==
+              firstPhysicalAddress.addresses[0].line1 && (
+              <p>{firstPhysicalAddress.addresses[0].line1}</p>
+            )}
+
+            <p>
+              {firstPhysicalAddress.addresses[0].city}{" "}
+              {firstPhysicalAddress.addresses[0].stateCode}{" "}
+              {firstPhysicalAddress.addresses[0].postalCode}
+            </p>
+          </>
+        ) : (
+          <p>No visitor center found for this park</p>
+        )}
+      </div>
       <div>
-        <h3>Check out the information below to plan your visit.</h3>
-        <h3>List of fun park adventures to be added......</h3>
+        <h3>Suggested Activities:</h3>
+        {isLoadingThingsToDo ? (
+          <p>Loading things to do...</p>
+        ) : thingsTodoData.length === 0 ? (
+          <p>No activities found for this park</p>
+        ) : (
+          thingsTodoData.slice(0, 7).map((activity) => (
+            <p key={activity.id}>
+              <a
+                className={ParkDetailsStyles.activityLinks}
+                href={activity.url}
+              >
+                {activity.title}
+              </a>
+            </p>
+          ))
+        )}
       </div>
     </main>
   );

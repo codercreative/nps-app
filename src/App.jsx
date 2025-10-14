@@ -43,18 +43,19 @@ function App() {
   );
 
   const baseURL = "https://developer.nps.gov/api/v1";
+
   const endpoint = {
     parks: `${baseURL}/parks`,
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(`${endpoint.parks}?limit=500`, {
+      const response = await fetch(`${endpoint.parks}?limit=500`, {
         headers: {
           "X-Api-Key": import.meta.env.VITE_API_KEY,
         },
       });
-      const json = await result.json();
+      const json = await response.json();
       console.log(json);
       setParks(json.data);
       setIsLoading(false);
