@@ -49,6 +49,7 @@ function App() {
   };
 
   useEffect(() => {
+    let isMounted = true;
     const fetchData = async () => {
       const response = await fetch(`${endpoint.parks}?limit=500`, {
         headers: {
@@ -57,10 +58,16 @@ function App() {
       });
       const json = await response.json();
       console.log(json);
-      setParks(json.data);
-      setIsLoading(false);
+      if (isMounted) {
+        setParks(json.data);
+        setIsLoading(false);
+      }
     };
     fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const location = useLocation();

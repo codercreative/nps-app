@@ -94,28 +94,3 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
 }
 
 export default MyParks;
-
-{
-  /* {mySavedParks.map((park) => (
-  <ParkDetails
-    key={park.id}
-    park={park}
-    isParkSaved={isParkSaved}
-    handleToggleMySavedParks={handleToggleMySavedParks}
-  />
-))} */
-}
-
-{
-  /* 
-      {mySavedParks.map((park) => (
-        <div key={park.id}>
-          {showSelectedParkDetails === park.id ? (
-            <ParkDetails
-              key={park.id}
-              park={park}
-              isParkSaved={isParkSaved}
-              handleToggleMySavedParks={handleToggleMySavedParks}
-            />
-          )  */
-}

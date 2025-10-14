@@ -28,7 +28,7 @@ Installed React Router. This library allows the user to navigate between differe
 - Visit the [NPS API documentation page](https://www.nps.gov/subjects/developer/api-documentation.htm) or go to the [Get Started Page](https://www.nps.gov/subjects/developer/get-started.htm).
 - Fill in your first and last name, and email address (the reason for use is optional).
 - The API key will be emailed to you right away.
-- Create an .env.local file in the root of your project and replace the placeholder with your API key. See below.
+- **Create an `.env.local` file in the root of your project and replace the api_key placeholder with your API key. See below.**
 
   ```env
   VITE_API_KEY=your_api_key_here

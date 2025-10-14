@@ -23,6 +23,7 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   };
 
   useEffect(() => {
+    let isMounted = true;
     const fetchThingsToDoData = async () => {
       const response = await fetch(endpoints.thingstodo(park.parkCode), {
         headers: {
@@ -31,13 +32,19 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
       });
       const json = await response.json();
       console.log(json);
-      setThingsToDoData(json.data);
-      setIsLoadingThingsToDo(false);
+      if (isMounted) {
+        setThingsToDoData(json.data);
+        setIsLoadingThingsToDo(false);
+      }
     };
     fetchThingsToDoData();
+    return () => {
+      isMounted = false;
+    };
   }, [park.parkCode]);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchVisitorCenters = async () => {
       const response = await fetch(endpoints.visitorcenters(park.parkCode), {
         headers: {
@@ -46,10 +53,15 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
       });
       const json = await response.json();
       console.log(json);
-      setVisitorCenters(json.data);
-      setIsLoadingVisitorCenter(false);
+      if (isMounted) {
+        setVisitorCenters(json.data);
+        setIsLoadingVisitorCenter(false);
+      }
     };
     fetchVisitorCenters();
+    return () => {
+      isMounted = false;
+    };
   }, [park.parkCode]);
 
   const firstPhysicalAddress = visitorCenters.find(
