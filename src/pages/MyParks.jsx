@@ -26,13 +26,26 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
         />
       ) : (
         <>
-          <IntroTextWrapper>
-            <h2>My Favorite Parks</h2>
-            <p>
-              Here are your saved parks for quick access. Click any park to see
-              more details, or tap the heart icon to remove it from your list.
-            </p>
-          </IntroTextWrapper>
+          {mySavedParks.length === 0 ? (
+            <IntroTextWrapper>
+              <h2>Dedicated Page for Your Favorite Parks</h2>
+              <p>
+                Browse the <em>All Parks</em> page. When you find a park you
+                like, open it to view more details. Click the 💚 icon to save it
+                here, and voilà - your parks are saved here for quick access.
+              </p>
+            </IntroTextWrapper>
+          ) : (
+            <IntroTextWrapper>
+              <h2>My Favorite Parks</h2>
+              <p>
+                Here are your saved parks for quick access. Click any park to
+                see more details, or tap the heart icon to remove it from your
+                list.
+              </p>
+            </IntroTextWrapper>
+          )}
+
           {mySavedParks.map((park) => (
             <div key={park.id} className={MyParksStyles.heartAndParkWrapper}>
               {/* HEART ICON */}

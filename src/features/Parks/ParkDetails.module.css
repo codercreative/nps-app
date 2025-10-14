@@ -81,6 +81,7 @@
 .activityLinks {
   text-decoration: none;
   color: #6fbf73;
+  border-bottom: 1px solid #ffa500;
   cursor: pointer;
 }
 

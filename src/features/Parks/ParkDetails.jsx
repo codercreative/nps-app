@@ -9,7 +9,7 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   const imageTitle = park.images[0].title;
   const imageCredit = park.images[0].credit;
 
-  const [thingsTodoData, setThingsTodoData] = useState([]);
+  const [thingsToDoData, setThingsToDoData] = useState([]);
   const [visitorCenters, setVisitorCenters] = useState([]);
   const [isLoadingVisitorCenter, setIsLoadingVisitorCenter] = useState(true);
   const [isLoadingThingsToDo, setIsLoadingThingsToDo] = useState(true);
@@ -31,7 +31,7 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
       });
       const json = await response.json();
       console.log(json);
-      setThingsTodoData(json.data);
+      setThingsToDoData(json.data);
       setIsLoadingThingsToDo(false);
     };
     fetchThingsToDoData();
@@ -122,7 +122,9 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
         <h3>Visitor Center:</h3>
         {isLoadingVisitorCenter ? (
           <p>Loading visitor center details...</p>
-        ) : firstPhysicalAddress ? (
+        ) : firstPhysicalAddress &&
+          firstPhysicalAddress.url &&
+          firstPhysicalAddress.url.includes("nps.gov") ? (
           <>
             <a
               href={firstPhysicalAddress?.url}
@@ -148,12 +150,13 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
       </div>
       <div>
         <h3>Suggested Activities:</h3>
+
         {isLoadingThingsToDo ? (
           <p>Loading things to do...</p>
-        ) : thingsTodoData.length === 0 ? (
+        ) : thingsToDoData.length === 0 ? (
           <p>No activities found for this park</p>
         ) : (
-          thingsTodoData.slice(0, 7).map((activity) => (
+          thingsToDoData.slice(0, 7).map((activity) => (
             <p key={activity.id}>
               <a
                 className={ParkDetailsStyles.activityLinks}
