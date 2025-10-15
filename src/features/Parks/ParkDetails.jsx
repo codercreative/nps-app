@@ -68,6 +68,13 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
     (center) => center.addresses[0]?.type === "Physical"
   );
 
+  const saveParkMessage = !isParkSaved(park) ? (
+    <p>
+      You can save this park to the My Parks page for later reference by
+      clicking on the 💚 icon.
+    </p>
+  ) : null;
+
   return (
     <main className={ParkDetailsStyles.main}>
       <div className={ParkDetailsStyles.introSection}>
@@ -79,15 +86,25 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
             </button>
           )}
         </div>
-        <p>
-          Find all the park details you need here to plan your visit.{" "}
-          {!isParkSaved(park) && (
+        <div>
+          {isLoadingThingsToDo || isLoadingVisitorCenter ? (
+            <p>Loading park details message...</p>
+          ) : visitorCenters.length > 0 && thingsToDoData.length > 0 ? (
             <>
-              You can also save this park to the My Parks page for later
-              reference by clicking on the 💚 icon.
+              <p className={ParkDetailsStyles.firstUserMsgSentence}>
+                Find all the park details you need here to plan your visit.{" "}
+              </p>
+              {saveParkMessage}
+            </>
+          ) : (
+            <>
+              <p className={ParkDetailsStyles.firstUserMsgSentence}>
+                Visitor information for this park is limited.{" "}
+              </p>
+              {saveParkMessage}
             </>
           )}
-        </p>
+        </div>
       </div>
       <div className={ParkDetailsStyles.parkTitleIconContainer}>
         <form

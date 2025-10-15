@@ -28,6 +28,10 @@
   border: 2px solid #ffa500;
 }
 
+.firstUserMsgSentence {
+  margin-bottom: 0.3em;
+}
+
 .parkTitleIconContainer {
   display: flex;
   align-items: center;
@@ -35,7 +39,7 @@
 }
 
 .parkTitle {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .heartBtn {
@@ -91,4 +95,10 @@
 
 .activityLinks:hover {
   color: #ffa500;
+}
+
+@media (min-width: 767px) {
+  .parkTitle {
+    font-size: 1.3rem;
+  }
 }

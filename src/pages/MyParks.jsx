@@ -32,7 +32,7 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
               <p>
                 Browse the <em>All Parks</em> page. When you find a park you
                 like, open it to view more details. Click the 💚 icon to save it
-                here, and voilà - your parks are saved here for quick access.
+                here, and voilà - your parks are saved for quick access.
               </p>
             </IntroTextWrapper>
           ) : (
