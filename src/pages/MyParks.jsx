@@ -48,7 +48,6 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
 
           {mySavedParks.map((park) => (
             <div key={park.id} className={MyParksStyles.heartAndParkWrapper}>
-              {/* HEART ICON */}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -68,7 +67,7 @@ function MyParks({ mySavedParks, isParkSaved, handleToggleMySavedParks }) {
                   ></i>
                 </button>
               </form>
-              {/* ====PARK INFO==== */}
+
               <div
                 key={park.id}
                 className={MyParksStyles.parkListContainer}

@@ -11,6 +11,12 @@ import NotFound from "./pages/NotFound";
 import FeaturedSection from "./features/Home/FeaturedSection";
 import SinglePark from "./features/Parks/SinglePark";
 
+const baseURL = "https://developer.nps.gov/api/v1";
+
+const endpoint = {
+  parks: `${baseURL}/parks`,
+};
+
 function App() {
   const [parks, setParks] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
@@ -42,25 +48,28 @@ function App() {
     [mySavedParks]
   );
 
-  const baseURL = "https://developer.nps.gov/api/v1";
-
-  const endpoint = {
-    parks: `${baseURL}/parks`,
-  };
-
   useEffect(() => {
     let isMounted = true;
+
     const fetchData = async () => {
-      const response = await fetch(`${endpoint.parks}?limit=500`, {
-        headers: {
-          "X-Api-Key": import.meta.env.VITE_API_KEY,
-        },
-      });
-      const json = await response.json();
-      console.log(json);
-      if (isMounted) {
-        setParks(json.data);
-        setIsLoading(false);
+      try {
+        const response = await fetch(`${endpoint.parks}?limit=500`, {
+          headers: {
+            "X-Api-Key": import.meta.env.VITE_API_KEY,
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`Request failed with response: ${response.status}`);
+        }
+
+        const json = await response.json();
+        console.log(json);
+        if (isMounted) {
+          setParks(json.data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching parks data:", error);
       }
     };
     fetchData();

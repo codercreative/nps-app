@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import ParkDetailsStyles from "./ParkDetails.module.css";
 
+const baseURL = "https://developer.nps.gov/api/v1";
+
+const endpoints = {
+  thingstodo: (parkCode) => `${baseURL}/thingstodo?parkCode=${parkCode}`,
+  visitorcenters: (parkCode) =>
+    `${baseURL}/visitorcenters?parkCode=${parkCode}`,
+};
+
 function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   const name = park.fullName;
   const state = park.states;
@@ -14,27 +22,30 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   const [isLoadingVisitorCenter, setIsLoadingVisitorCenter] = useState(true);
   const [isLoadingThingsToDo, setIsLoadingThingsToDo] = useState(true);
 
-  const baseURL = "https://developer.nps.gov/api/v1";
-
-  const endpoints = {
-    thingstodo: (parkCode) => `${baseURL}/thingstodo?parkCode=${parkCode}`,
-    visitorcenters: (parkCode) =>
-      `${baseURL}/visitorcenters?parkCode=${parkCode}`,
-  };
-
   useEffect(() => {
     let isMounted = true;
     const fetchThingsToDoData = async () => {
-      const response = await fetch(endpoints.thingstodo(park.parkCode), {
-        headers: {
-          "X-Api-Key": import.meta.env.VITE_API_KEY,
-        },
-      });
-      const json = await response.json();
-      console.log(json);
-      if (isMounted) {
-        setThingsToDoData(json.data);
-        setIsLoadingThingsToDo(false);
+      try {
+        const response = await fetch(endpoints.thingstodo(park.parkCode), {
+          headers: {
+            "X-Api-Key": import.meta.env.VITE_API_KEY,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with response: ${response.status}`);
+        }
+        const json = await response.json();
+        console.log(json);
+        if (isMounted) {
+          setThingsToDoData(json.data);
+          setIsLoadingThingsToDo(false);
+        }
+      } catch (error) {
+        console.error(
+          "An error occurred while fetching things to do data: ",
+          error
+        );
       }
     };
     fetchThingsToDoData();
@@ -46,16 +57,27 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
   useEffect(() => {
     let isMounted = true;
     const fetchVisitorCenters = async () => {
-      const response = await fetch(endpoints.visitorcenters(park.parkCode), {
-        headers: {
-          "X-Api-Key": import.meta.env.VITE_API_KEY,
-        },
-      });
-      const json = await response.json();
-      console.log(json);
-      if (isMounted) {
-        setVisitorCenters(json.data);
-        setIsLoadingVisitorCenter(false);
+      try {
+        const response = await fetch(endpoints.visitorcenters(park.parkCode), {
+          headers: {
+            "X-Api-Key": import.meta.env.VITE_API_KEY,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with response: ${response.status}`);
+        }
+        const json = await response.json();
+        console.log(json);
+        if (isMounted) {
+          setVisitorCenters(json.data);
+          setIsLoadingVisitorCenter(false);
+        }
+      } catch (error) {
+        console.error(
+          "An error occurred while fetching visitor center data: ",
+          error
+        );
       }
     };
     fetchVisitorCenters();
@@ -79,16 +101,16 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
     <main className={ParkDetailsStyles.main}>
       <div className={ParkDetailsStyles.introSection}>
         <div className={ParkDetailsStyles.parkNameAndBackBtnWrapper}>
-          <h2>{name}</h2>
+          <h2 className={ParkDetailsStyles.parkMainTitle}>{name}</h2>
           {onBack && (
             <button className={ParkDetailsStyles.backBtn} onClick={onBack}>
-              Back to My Parks List
+              ← Back
             </button>
           )}
         </div>
         <div>
           {isLoadingThingsToDo || isLoadingVisitorCenter ? (
-            <p>Loading park details message...</p>
+            <p>Loading message about park details...</p>
           ) : visitorCenters.length > 0 && thingsToDoData.length > 0 ? (
             <>
               <p className={ParkDetailsStyles.firstUserMsgSentence}>

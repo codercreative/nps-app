@@ -16,6 +16,10 @@
   margin-bottom: 1em;
 }
 
+.parkMainTitle {
+  font-size: 1.3rem;
+}
+
 .backBtn {
   color: #6fbf73;
   border: 2px solid #6fbf73;
@@ -98,6 +102,10 @@
 }
 
 @media (min-width: 767px) {
+  .parkMainTitle {
+    font-size: 1.5rem;
+  }
+
   .parkTitle {
     font-size: 1.3rem;
   }
