@@ -36,7 +36,7 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
           throw new Error(`Request failed with response: ${response.status}`);
         }
         const json = await response.json();
-        console.log(json);
+
         if (isMounted) {
           setThingsToDoData(json.data);
           setIsLoadingThingsToDo(false);
@@ -68,7 +68,7 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
           throw new Error(`Request failed with response: ${response.status}`);
         }
         const json = await response.json();
-        console.log(json);
+
         if (isMounted) {
           setVisitorCenters(json.data);
           setIsLoadingVisitorCenter(false);
@@ -104,7 +104,7 @@ function ParkDetails({ park, isParkSaved, handleToggleMySavedParks, onBack }) {
           <h2 className={ParkDetailsStyles.parkMainTitle}>{name}</h2>
           {onBack && (
             <button className={ParkDetailsStyles.backBtn} onClick={onBack}>
-              ← Back
+              Go Back
             </button>
           )}
         </div>

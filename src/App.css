@@ -8,7 +8,6 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-
   line-height: 1.5;
   font-family: "Funnel Display", sans-serif;
   color: #6fbf73;
@@ -21,11 +20,6 @@ h4,
 h5 {
   font-family: "Alan Sans", sans-serif;
   margin: 0;
-}
-
-img,
-button {
-  border-radius: 12px;
 }
 
 .appContainer {

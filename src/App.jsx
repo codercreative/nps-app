@@ -63,7 +63,7 @@ function App() {
         }
 
         const json = await response.json();
-        console.log(json);
+
         if (isMounted) {
           setParks(json.data);
           setIsLoading(false);
@@ -105,17 +105,6 @@ function App() {
         setHeaderTitle("Not Found");
     }
   }, [location]);
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("Saved Parks")) === null) {
-      setMySavedParks([]);
-    } else {
-      const parsedJSONParkData = JSON.parse(
-        localStorage.getItem("Saved Parks")
-      );
-      setMySavedParks(parsedJSONParkData);
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("Saved Parks", JSON.stringify(mySavedParks));

@@ -14,11 +14,7 @@ function Parks({ parks, isLoading }) {
       const parkTitle = park.fullName.toLowerCase();
       return parkTitle.includes(userInput);
     });
-    if (filterPark.length > 0) {
-      setMatchedPark(filterPark);
-    } else if (!matchedPark && userInputText.length > 0) {
-      setMatchedPark([]);
-    }
+    setMatchedPark(filterPark);
   }
 
   const [searchParams, setSearchParams] = useSearchParams();
