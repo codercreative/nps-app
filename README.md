@@ -4,7 +4,7 @@ A National Park Service app built with **React** and **Vite**. This project is p
 
 ## Reason for Working on a National Park Service App
 
-It is fun to work on a site about nature as this is something we all enjoy! Also, I love working with beautiful images - and the NPS API provides a rich supply. Finally, I appreciate the NPS API page which is clear and to the point.
+It is fun to work on a site about nature as this is something we all enjoy! Also, I love working with beautiful images - and the NPS API provides a rich supply.
 
 ## Description
 
